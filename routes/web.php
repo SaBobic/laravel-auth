@@ -13,10 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
-
 Auth::routes();
 
-Route::get('/admin', 'Admin\HomeController@index')->middleware('auth')->name('admin.home');
+Route::prefix('admin')->middleware('auth')->name('admin.')->namespace('Admin')->group(function () {
+
+    // Rotta pagina admin
+    Route::get('/', 'HomeController@index')->name('home');
+
+    // Rotte posts
+    Route::resource('posts', 'PostController');
+
+    // Route::get('/posts', 'PostController@index')->name('posts.index');
+    // Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+    // Route::get('/posts/create', 'PostController@create')->name('posts.create');
+    // Route::post('/posts', 'PostController@store')->name('posts.store');
+    // Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+    // Route::put('/posts/{post}', 'PostController@update')->name('posts.update');
+    // Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
+
+    // Tutte le rotte di admin non registrate vanno in 404
+    Route::get('/admin/{any}', function () {
+        abort('404');
+    })->where('any', '.*');
+});
+
+Route::get('/{any?}', function () {
+    return view('guest.home');
+})->where('any', '.*');
