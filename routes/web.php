@@ -32,7 +32,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->namespace('Admin')->
     // Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
 
     // Tutte le rotte di admin non registrate vanno in 404
-    Route::get('/admin/{any}', function () {
+    Route::get('/{any}', function () {
         abort('404');
     })->where('any', '.*');
 });
