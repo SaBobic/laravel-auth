@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Titolo</th>
+                <th scope="col">Title</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Updated at</th>
                 <th scope="col">Actions</th>
@@ -20,9 +20,9 @@
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>
-                            <div class="btn btn-primary">View</div>
-                            <div class="btn btn-success">Edit</div>
-                            <div class="btn btn-danger">Delete</div>
+                            <a class="btn btn-primary" href="">View</a>
+                            <a class="btn btn-success" href="">Edit</a>
+                            <a class="btn btn-danger" href="">Delete</a>
                         </td>
                     </tr>
                 @empty
