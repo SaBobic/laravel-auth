@@ -20,7 +20,7 @@
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>
-                            <a class="btn btn-primary" href="">View</a>
+                            <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">View</a>
                             <a class="btn btn-success" href="">Edit</a>
                             <a class="btn btn-danger" href="">Delete</a>
                         </td>
