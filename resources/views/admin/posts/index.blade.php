@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
+@section('extra-js')
+    <script src="{{ asset('js/delete_confirm.js') }}" defer></script>
+@endsection
+
 @section('content')
+
 <div class="container">
     <table class="table">
         <thead>
@@ -22,7 +27,11 @@
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">View</a>
                             <a class="btn btn-success" href="">Edit</a>
-                            <a class="btn btn-danger" href="">Delete</a>
+                            <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" href="">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @empty

@@ -81,20 +81,39 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
-/*!***********************************!*\
-  !*** multi ./resources/js/vue.js ***!
-  \***********************************/
+/******/ ({
+
+/***/ "./resources/js/delete_confirm.js":
+/*!****************************************!*\
+  !*** ./resources/js/delete_confirm.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var forms = document.querySelectorAll(".delete-form");
+forms.forEach(function (form) {
+  form.addEventListener("submit", function (e) {
+    var hasConfirmed = confirm("Are you sure to delete this post?");
+    e.preventDefault();
+    if (hasConfirmed) form.submit();
+  });
+});
+
+/***/ }),
+
+/***/ 2:
+/*!**********************************************!*\
+  !*** multi ./resources/js/delete_confirm.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Laravel\\laravel-auth\\resources\\js\\vue.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+module.exports = __webpack_require__(/*! C:\Laravel\laravel-auth\resources\js\delete_confirm.js */"./resources/js/delete_confirm.js");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });
