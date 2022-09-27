@@ -7,6 +7,9 @@
 @section('content')
 
 <div class="container">
+    <div class="text-right mb-3">
+        <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">Add new post</a> 
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -38,6 +41,6 @@
                         <h2>Non ci sono post da visualizzare!</h2>
                 @endforelse
         </tbody>
-    </table>        
+    </table>
 </div>
 @endsection
