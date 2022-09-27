@@ -1,12 +1,22 @@
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
 @if ($post->exists)
-<form action="{{ route('admin.posts.update', $post) }}" method="POST">
+<form action="{{ route('admin.posts.update', $post) }}" method="POST" novalidate>
     @method('PUT')
 @else
-<form action="{{ route('admin.posts.store') }}" method="POST">
+<form action="{{ route('admin.posts.store') }}" method="POST" novalidate>
 @endif
 
 
     @csrf
+
+
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="title">Title</label>

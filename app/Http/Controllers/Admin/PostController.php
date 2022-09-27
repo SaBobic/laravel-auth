@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -39,6 +40,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'unique:posts|required|string',
+            'content' => 'required|string',
+            'image' => 'nullable|url',
+        ], [
+            'title.required' => 'Title field cannot be empty',
+            'title.unique' => 'This title already exists',
+            'content.required' => 'Content field cannot be empty',
+            'image.url' => 'Invalid url',
+        ]);
+
         $data = $request->all();
         $new_post = new Post();
         $new_post->slug = Str::slug($data['title'], '-');
@@ -78,6 +90,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id)],
+            'content' => 'required|string',
+            'image' => 'nullable|url',
+        ], [
+            'title.required' => 'Title field cannot be empty',
+            'title.unique' => 'This title already exists',
+            'content.required' => 'Content field cannot be empty',
+            'image.url' => 'Invalid url',
+        ]);
+
         $data = $request->all();
         $post->slug = Str::slug($data['title'], '-');
         $post->update($data);
