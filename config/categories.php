@@ -23,8 +23,8 @@ return [
     ],
     [
         'label' => 'SQL',
-        'color' => 'muted',
-        'color_name' => 'grigio',
+        'color' => 'light',
+        'color_name' => 'grigio chiaro',
     ],
     [
         'label' => 'Bootstrap',
