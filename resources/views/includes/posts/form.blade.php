@@ -20,18 +20,18 @@
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $post->title }}">
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $post->title) }}">
         </div>
     </div>
 
     <div class="form-group">
     <label for="image">Image URL</label>
-    <input type="url" class="form-control" id="image" name="image" value="{{ old('image') ?? $post->image }}">
+    <input type="url" class="form-control" id="image" name="image" value="{{ old('image', $post->image) }}">
     </div>
 
     <div class="form-group">
         <label for="content">Content</label>
-        <textarea type="text" rows="5" class="form-control" id="content" name="content">{{ old('contect') ?? $post->content }}</textarea>
+        <textarea type="text" rows="5" class="form-control" id="content" name="content">{{ old('content', $post->content) }}</textarea>
     </div>
 
     <div class="form-group">
