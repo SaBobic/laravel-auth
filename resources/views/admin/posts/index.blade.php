@@ -44,9 +44,30 @@
                         </td>
                     </tr>
                 @empty
-                        <h2>Non ci sono post da visualizzare!</h2>
+                    <tr>
+                        <td colspan="6">
+                            <h2>Non ci sono post da visualizzare!</h2>
+                        </td>    
+                    </tr>
                 @endforelse
         </tbody>
     </table>
+    <div class="row gy-3">
+        @foreach ($categories as $category)
+        <div class="col-md-4 mb-3">
+                    <li class="list-group-item h-100">
+                        {{ $category->label }}
+                        <span class="badge badge-{{ $category->color }} badge-pill">{{ count($category->posts->pluck('id')->toArray()) }}</span>
+                        <div>
+                            <ul>
+                                @foreach ($category->posts as $post)
+                                    <li><a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
+                </div>
+        @endforeach
+    </div>
 </div>
 @endsection
