@@ -46,11 +46,13 @@ class PostController extends Controller
             'title' => 'unique:posts|required|string',
             'content' => 'required|string',
             'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id',
         ], [
-            'title.required' => 'Title field cannot be empty',
-            'title.unique' => 'This title already exists',
-            'content.required' => 'Content field cannot be empty',
-            'image.url' => 'Invalid url',
+            'title.required' => 'Il campo Titolo non può essere vuoto',
+            'title.unique' => 'Esiste già un post con questo titolo',
+            'content.required' => 'Il campo Contenuto non può essere vuoto',
+            'image.url' => 'URL invalido',
+            'category_id.exists' => 'La categoria selezionata non esiste',
         ]);
 
         $data = $request->all();
@@ -97,11 +99,13 @@ class PostController extends Controller
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id)],
             'content' => 'required|string',
             'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id',
         ], [
-            'title.required' => 'Title field cannot be empty',
-            'title.unique' => 'This title already exists',
-            'content.required' => 'Content field cannot be empty',
-            'image.url' => 'Invalid url',
+            'title.required' => 'Il campo Titolo non può essere vuoto',
+            'title.unique' => 'Esiste già un post con questo titolo',
+            'content.required' => 'Il campo Contenuto non può essere vuoto',
+            'image.url' => 'URL invalido',
+            'category_id.exists' => 'La categoria selezionata non esiste',
         ]);
 
         $data = $request->all();

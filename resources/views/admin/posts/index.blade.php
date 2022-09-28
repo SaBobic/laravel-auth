@@ -14,10 +14,11 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Updated at</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Creato il</th>
+                <th scope="col">Aggiornato il</th>
+                <th scope="col">Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,11 @@
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
+                        @if ($post->category)
+                            <td><span class="badge badge-{{ $post->category->color }}">{{ $post->category->label }}</span></td>
+                        @else
+                            <td>Nessuna</td>
+                        @endif
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>

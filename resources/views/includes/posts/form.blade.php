@@ -23,7 +23,7 @@
         <div class="form-group col-md-3">
             <label for="category">Categoria</label>
             <select class="form-control" id="category" name="category_id">
-                <option>Scegli una categoria</option>
+                <option value="">Scegli una categoria</option>
                 @foreach ($categories as $category)    
                     <option
                     @if (old('category_id', $post->category_id) == $category['id']) selected @endif
