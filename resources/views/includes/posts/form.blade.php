@@ -49,5 +49,6 @@
             <label class="form-check-label" for="publish">Pubblica</label>
         </div>
     </div>
+    <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Ritorna all'indice</a>
     <button type="submit" class="btn btn-success">{{ $post->exists ? 'Modifica post' : 'Crea post' }}</button>
 </form>

@@ -96,7 +96,7 @@
 var forms = document.querySelectorAll(".delete-form");
 forms.forEach(function (form) {
   form.addEventListener("submit", function (e) {
-    var hasConfirmed = confirm("Are you sure to delete this post?");
+    var hasConfirmed = confirm("Sei sicuro di vol eliminare questo articolo?");
     e.preventDefault();
     if (hasConfirmed) form.submit();
   });

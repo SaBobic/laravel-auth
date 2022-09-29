@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="text-right mb-3">
-        <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">Add new post</a> 
+        <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">Aggiungi nuovo articolo</a> 
     </div>
     <table class="table">
         <thead>
@@ -34,19 +34,19 @@
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">View</a>
-                            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">Guarda</a>
+                            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
                             <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" href="">Delete</button>
+                                <button class="btn btn-danger" href="">Elimina</button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
                         <td colspan="6">
-                            <h2>Non ci sono post da visualizzare!</h2>
+                            <h2>Non ci sono articoli da visualizzare!</h2>
                         </td>    
                     </tr>
                 @endforelse
