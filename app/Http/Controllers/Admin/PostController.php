@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -32,8 +33,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         $post = new Post;
-        return view('admin.posts.create', compact('post', 'categories'));
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -49,12 +51,14 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'nullable|url',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
             'title.required' => 'Il campo Titolo non può essere vuoto',
             'title.unique' => 'Esiste già un post con questo titolo',
             'content.required' => 'Il campo Contenuto non può essere vuoto',
             'image.url' => 'URL invalido',
             'category_id.exists' => 'La categoria selezionata non esiste',
+            'tags.exists' => 'I tag selezionati non esistono',
         ]);
 
         $data = $request->all();
@@ -63,6 +67,9 @@ class PostController extends Controller
         $new_post->user_id = Auth::id();
         $new_post->fill($data);
         $new_post->save();
+        if (array_key_exists('tags', $data)) {
+            $new_post->tags()->attach($data['tags']);
+        };
         return redirect()->route('admin.posts.index')->with('message', 'Il post è stato creato con successo')->with('type', 'success');
     }
 
@@ -89,8 +96,11 @@ class PostController extends Controller
             return redirect()->route('admin.posts.index')->with('message', 'Non hai le autorizzazioni per modificare questo post')->with('type', 'danger');
         };
 
+        $current_tags_ids = $post->tags->pluck('id')->toArray();
+
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'current_tags_ids'));
     }
 
     /**
@@ -107,17 +117,27 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'nullable|url',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
             'title.required' => 'Il campo Titolo non può essere vuoto',
             'title.unique' => 'Esiste già un post con questo titolo',
             'content.required' => 'Il campo Contenuto non può essere vuoto',
             'image.url' => 'URL invalido',
             'category_id.exists' => 'La categoria selezionata non esiste',
+            'tags.exists' => 'I tag selezionati non esistono',
         ]);
 
         $data = $request->all();
         $post->slug = Str::slug($data['title'], '-');
+
+        if (array_key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
+
         $post->update($data);
+
         return redirect()->route('admin.posts.index')->with('message', 'Il post è stato aggiornato con successo')->with('type', 'success');
     }
 

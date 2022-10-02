@@ -27,15 +27,34 @@
                 @foreach ($categories as $category)    
                     <option
                     @if (old('category_id', $post->category_id) == $category['id']) selected @endif
-                    value="{{ $category['id'] }}">{{ $category['label'] }}</option>
+                    value="{{ $category['id'] }}">
+                        {{ $category['label'] }}
+                    </option>
                 @endforeach
             </select>
         </div>
     </div>
 
     <div class="form-group">
-    <label for="image">URL immagine</label>
-    <input type="url" class="form-control" id="image" name="image" value="{{ old('image', $post->image) }}">
+        <div class="mb-1">Tag</div>
+        @foreach ($tags as $tag)
+            <div class="form-check form-check-inline">
+                <input
+                    @if (in_array($tag->id, old('tags', $current_tags_ids ?? []))) checked @endif
+                    class="form-check-input"
+                    name="tags[]"
+                    type="checkbox"
+                    id="tag-{{ $tag->label }}"
+                    value="{{ $tag->id }}"
+                    >
+                <label class="form-check-label" for="tag-{{ $tag->label }}">{{ $tag->label }}</label>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
+        <label for="image">URL immagine</label>
+        <input type="url" class="form-control" id="image" name="image" value="{{ old('image', $post->image) }}">
     </div>
 
     <div class="form-group">
