@@ -15,9 +15,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Titolo</th>
+                <th scope="col">Autore</th>
                 <th scope="col">Categoria</th>
-                <th scope="col">Creato il</th>
-                <th scope="col">Aggiornato il</th>
+                <th scope="col">Ultimo aggiornamento</th>
                 <th scope="col">Azioni</th>
             </tr>
         </thead>
@@ -26,12 +26,12 @@
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
+                        <td>{{ $post->user->name }}</td>
                         @if ($post->category)
                             <td><span class="badge badge-{{ $post->category->color }}">{{ $post->category->label }}</span></td>
                         @else
                             <td>Nessuna</td>
                         @endif
-                        <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">Guarda</a>

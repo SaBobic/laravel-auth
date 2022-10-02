@@ -15,10 +15,13 @@
             <p class="card-text">{{ $post->content }}</p>
         </div>
         <div>
+            <strong>Autore</strong> {{ $post->user->name }}
+        </div>
+        <div>
             <strong>Pubblicato il</strong> {{ $post->created_at }}
         </div>
         <div class="mb-3">
-            <strong>Aggiornato il</strong> {{ $post->updated_at }}
+            <strong>Ultimo aggiornamento</strong> {{ $post->updated_at }}
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Ritorna all'indice</a>
