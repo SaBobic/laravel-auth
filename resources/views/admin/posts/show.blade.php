@@ -15,7 +15,12 @@
             <p class="card-text">{{ $post->content }}</p>
         </div>
         <div>
-            <strong>Autore</strong> {{ $post->user->name }}
+            <strong>Autore</strong>
+            @if ($post->user)
+                {{ $post->user->name }}
+            @else
+                Anonimo
+            @endif
         </div>
         <div>
             <strong>Pubblicato il</strong> {{ $post->created_at }}

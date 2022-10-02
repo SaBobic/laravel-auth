@@ -26,7 +26,13 @@
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->user->name }}</td>
+                        <td>
+                            @if ($post->user)
+                                {{ $post->user->name }}
+                            @else
+                                Anonimo
+                            @endif
+                        </td>
                         @if ($post->category)
                             <td><span class="badge badge-{{ $post->category->color }}">{{ $post->category->label }}</span></td>
                         @else
