@@ -17,7 +17,7 @@
         <div>
             <strong>Autore</strong>
             @if ($post->user)
-                {{ $post->user->name }}
+                {{ $post->user->userDetail->getFullName() }}
             @else
                 Anonimo
             @endif

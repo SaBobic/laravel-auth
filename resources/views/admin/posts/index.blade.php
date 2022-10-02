@@ -28,7 +28,7 @@
                         <td>{{ $post->title }}</td>
                         <td>
                             @if ($post->user)
-                                {{ $post->user->name }}
+                                {{ $post->user->userDetail->getFullName() }}
                             @else
                                 Anonimo
                             @endif
