@@ -17,7 +17,7 @@
                 <th scope="col">Titolo</th>
                 <th scope="col">Autore</th>
                 <th scope="col">Categoria</th>
-                <th scope="col">Ultimo aggiornamento</th>
+                <th scope="col">Tag</th>
                 <th scope="col">Azioni</th>
             </tr>
         </thead>
@@ -33,12 +33,22 @@
                                 Anonimo
                             @endif
                         </td>
-                        @if ($post->category)
-                            <td><span class="badge badge-{{ $post->category->color }}">{{ $post->category->label }}</span></td>
-                        @else
-                            <td>Nessuna</td>
-                        @endif
-                        <td>{{ $post->updated_at }}</td>
+                        <td>
+                            @if ($post->category)
+                                <span class="badge badge-{{ $post->category->color }}">{{ $post->category->label }}</span>
+                            @else
+                                Nessuna
+                            @endif
+                        </td>
+                        <td>
+                            @if ($post->tags)
+                                @foreach ($post->tags as $tag)
+                                    <span class="badge badge-{{ $tag->color }}">{{ $tag->label }}</span>
+                                @endforeach
+                            @else
+                                Nessuno
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">Guarda</a>
                             @if ($post->user_id === Auth::id())
