@@ -30,12 +30,14 @@
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Ritorna all'indice</a>
-            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
-            <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger" href="">Elimina</button>
-            </form>
+            @if ($post->user_id === Auth::id())
+                <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
+                <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" href="">Elimina</button>
+                </form>
+            @endif
         </div>
     </div>
 </div>

@@ -41,12 +41,14 @@
                         <td>{{ $post->updated_at }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}">Guarda</a>
-                            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
-                            <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" href="">Elimina</button>
-                            </form>
+                            @if ($post->user_id === Auth::id())
+                                <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">Modifica</a>
+                                <form class="d-inline-block delete-form" action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" href="">Elimina</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @empty
